@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val apiService : TheMovieDBInterface = TheMovieDBClient.getClient()
+        val apiService: TheMovieDBInterface = TheMovieDBClient.getClient()
 
         movieRepository = MoviePagedListRepository(apiService)
 
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 val viewType = movieAdapter.getItemViewType(position)
-                if (viewType == movieAdapter.MOVIE_VIEW_TYPE) return  1
+                if (viewType == movieAdapter.MOVIE_VIEW_TYPE) return 1
                 else return 3
             }
         };
@@ -52,8 +52,10 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.networkState.observe(this, Observer {
-            progress_bar_popular.visibility = if (viewModel.listIsEmpty() && it == NetworkState.LOADING) View.VISIBLE else View.GONE
-            txt_error_popular.visibility = if (viewModel.listIsEmpty() && it == NetworkState.ERROR) View.VISIBLE else View.GONE
+            progress_bar_popular.visibility =
+                if (viewModel.listIsEmpty() && it == NetworkState.LOADING) View.VISIBLE else View.GONE
+            txt_error_popular.visibility =
+                if (viewModel.listIsEmpty() && it == NetworkState.ERROR) View.VISIBLE else View.GONE
 
             if (!viewModel.listIsEmpty()) {
                 movieAdapter.setNetworkState(it)
@@ -61,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
+
     private fun getViewModel(): MainActivityViewModel {
         return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {

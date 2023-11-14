@@ -27,9 +27,9 @@ class SingleMovie : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_single_movie)
 
-        val movieId: Int = intent.getIntExtra("id",1)
+        val movieId: Int = intent.getIntExtra("id", 1)
 
-        val apiService : TheMovieDBInterface = TheMovieDBClient.getClient()
+        val apiService: TheMovieDBInterface = TheMovieDBClient.getClient()
         movieRepository = MovieDetailsRepository(apiService)
 
         viewModel = getViewModel(movieId)
@@ -45,7 +45,8 @@ class SingleMovie : AppCompatActivity() {
         })
 
     }
-    fun bindUI( it: MovieDetails){
+
+    fun bindUI(it: MovieDetails) {
         movie_title.text = it.title
         movie_tagline.text = it.tagline
         movie_release_date.text = it.releaseDate
@@ -66,11 +67,11 @@ class SingleMovie : AppCompatActivity() {
     }
 
 
-    private fun getViewModel(movieId:Int): SingleMovieViewModel {
+    private fun getViewModel(movieId: Int): SingleMovieViewModel {
         return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 @Suppress("UNCHECKED_CAST")
-                return SingleMovieViewModel(movieRepository,movieId) as T
+                return SingleMovieViewModel(movieRepository, movieId) as T
             }
         })[SingleMovieViewModel::class.java]
     }

@@ -18,7 +18,8 @@ import kotlinx.android.synthetic.main.movie_list_item.view.*
 import kotlinx.android.synthetic.main.network_state_item.view.*
 
 
-class PopularMoviePagedListAdapter(public val context: Context) : PagedListAdapter<Movie, RecyclerView.ViewHolder>(MovieDiffCallback()) {
+class PopularMoviePagedListAdapter(public val context: Context) :
+    PagedListAdapter<Movie, RecyclerView.ViewHolder>(MovieDiffCallback()) {
 
     val MOVIE_VIEW_TYPE = 1
     val NETWORK_VIEW_TYPE = 2
@@ -41,9 +42,8 @@ class PopularMoviePagedListAdapter(public val context: Context) : PagedListAdapt
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (getItemViewType(position) == MOVIE_VIEW_TYPE) {
-            (holder as MovieItemViewHolder).bind(getItem(position),context)
-        }
-        else {
+            (holder as MovieItemViewHolder).bind(getItem(position), context)
+        } else {
             (holder as NetworkStateItemViewHolder).bind(networkState)
         }
     }
@@ -66,8 +66,6 @@ class PopularMoviePagedListAdapter(public val context: Context) : PagedListAdapt
     }
 
 
-
-
     class MovieDiffCallback : DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
             return oldItem.id == newItem.id
@@ -80,18 +78,18 @@ class PopularMoviePagedListAdapter(public val context: Context) : PagedListAdapt
     }
 
 
-    class MovieItemViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+    class MovieItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(movie: Movie?,context: Context) {
+        fun bind(movie: Movie?, context: Context) {
             itemView.cv_movie_title.text = movie?.title
-            itemView.cv_movie_release_date.text =  movie?.releaseDate
+            itemView.cv_movie_release_date.text = movie?.releaseDate
 
             val moviePosterURL = POSTER_BASE_URL + movie?.posterPath
             Glide.with(itemView.context)
                 .load(moviePosterURL)
                 .into(itemView.cv_iv_movie_poster);
 
-            itemView.setOnClickListener{
+            itemView.setOnClickListener {
                 val intent = Intent(context, SingleMovie::class.java)
                 intent.putExtra("id", movie?.id)
                 context.startActivity(intent)
@@ -101,25 +99,22 @@ class PopularMoviePagedListAdapter(public val context: Context) : PagedListAdapt
 
     }
 
-    class NetworkStateItemViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+    class NetworkStateItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(networkState: NetworkState?) {
             if (networkState != null && networkState == NetworkState.LOADING) {
                 itemView.progress_bar_item.visibility = View.VISIBLE;
-            }
-            else  {
+            } else {
                 itemView.progress_bar_item.visibility = View.GONE;
             }
 
             if (networkState != null && networkState == NetworkState.ERROR) {
                 itemView.error_msg_item.visibility = View.VISIBLE;
                 itemView.error_msg_item.text = networkState.msg;
-            }
-            else if (networkState != null && networkState == NetworkState.ENDOFLIST) {
+            } else if (networkState != null && networkState == NetworkState.ENDOFLIST) {
                 itemView.error_msg_item.visibility = View.VISIBLE;
                 itemView.error_msg_item.text = networkState.msg;
-            }
-            else {
+            } else {
                 itemView.error_msg_item.visibility = View.GONE;
             }
         }
@@ -143,8 +138,6 @@ class PopularMoviePagedListAdapter(public val context: Context) : PagedListAdapt
         }
 
     }
-
-
 
 
 }

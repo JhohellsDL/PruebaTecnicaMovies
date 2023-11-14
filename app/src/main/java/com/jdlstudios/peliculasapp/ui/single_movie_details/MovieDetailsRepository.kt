@@ -7,13 +7,17 @@ import com.jdlstudios.peliculasapp.data.repository.NetworkState
 import com.jdlstudios.peliculasapp.data.vo.MovieDetails
 import io.reactivex.disposables.CompositeDisposable
 
-class MovieDetailsRepository (private val apiService : TheMovieDBInterface) {
+class MovieDetailsRepository(private val apiService: TheMovieDBInterface) {
 
     lateinit var movieDetailsNetworkDataSource: MovieDetailsNetworkDataSource
 
-    fun fetchSingleMovieDetails (compositeDisposable: CompositeDisposable, movieId: Int) : LiveData<MovieDetails> {
+    fun fetchSingleMovieDetails(
+        compositeDisposable: CompositeDisposable,
+        movieId: Int
+    ): LiveData<MovieDetails> {
 
-        movieDetailsNetworkDataSource = MovieDetailsNetworkDataSource(apiService,compositeDisposable)
+        movieDetailsNetworkDataSource =
+            MovieDetailsNetworkDataSource(apiService, compositeDisposable)
         movieDetailsNetworkDataSource.fetchMovieDetails(movieId)
 
         return movieDetailsNetworkDataSource.downloadedMovieResponse
@@ -23,7 +27,6 @@ class MovieDetailsRepository (private val apiService : TheMovieDBInterface) {
     fun getMovieDetailsNetworkState(): LiveData<NetworkState> {
         return movieDetailsNetworkDataSource.networkState
     }
-
 
 
 }

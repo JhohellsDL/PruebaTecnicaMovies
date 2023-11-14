@@ -8,13 +8,16 @@ import com.jdlstudios.peliculasapp.data.vo.MovieDetails
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class MovieDetailsNetworkDataSource (private val apiService : TheMovieDBInterface, private val compositeDisposable: CompositeDisposable) {
+class MovieDetailsNetworkDataSource(
+    private val apiService: TheMovieDBInterface,
+    private val compositeDisposable: CompositeDisposable
+) {
 
-    private val _networkState  = MutableLiveData<NetworkState>()
+    private val _networkState = MutableLiveData<NetworkState>()
     val networkState: LiveData<NetworkState>
         get() = _networkState
 
-    private val _downloadedMovieDetailsResponse =  MutableLiveData<MovieDetails>()
+    private val _downloadedMovieDetailsResponse = MutableLiveData<MovieDetails>()
     val downloadedMovieResponse: LiveData<MovieDetails>
         get() = _downloadedMovieDetailsResponse
 
@@ -39,10 +42,8 @@ class MovieDetailsNetworkDataSource (private val apiService : TheMovieDBInterfac
                     )
             )
 
-        }
-
-        catch (e: Exception){
-            Log.e("MovieDetailsDataSource",e.message)
+        } catch (e: Exception) {
+            Log.e("MovieDetailsDataSource", e.message)
         }
 
 

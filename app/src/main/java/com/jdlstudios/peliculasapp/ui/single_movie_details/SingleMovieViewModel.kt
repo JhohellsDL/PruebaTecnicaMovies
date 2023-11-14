@@ -6,15 +6,16 @@ import com.jdlstudios.peliculasapp.data.repository.NetworkState
 import com.jdlstudios.peliculasapp.data.vo.MovieDetails
 import io.reactivex.disposables.CompositeDisposable
 
-class SingleMovieViewModel (private val movieRepository : MovieDetailsRepository, movieId: Int)  : ViewModel() {
+class SingleMovieViewModel(private val movieRepository: MovieDetailsRepository, movieId: Int) :
+    ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 
-    val  movieDetails : LiveData<MovieDetails> by lazy {
-        movieRepository.fetchSingleMovieDetails(compositeDisposable,movieId)
+    val movieDetails: LiveData<MovieDetails> by lazy {
+        movieRepository.fetchSingleMovieDetails(compositeDisposable, movieId)
     }
 
-    val networkState : LiveData<NetworkState> by lazy {
+    val networkState: LiveData<NetworkState> by lazy {
         movieRepository.getMovieDetailsNetworkState()
     }
 
@@ -22,7 +23,5 @@ class SingleMovieViewModel (private val movieRepository : MovieDetailsRepository
         super.onCleared()
         compositeDisposable.dispose()
     }
-
-
 
 }
