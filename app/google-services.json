@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "202079062824",
+    "project_id": "pruebatecnicamovies",
+    "storage_bucket": "pruebatecnicamovies.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202079062824:android:46da04ad156c15e802de1d",
+        "android_client_info": {
+          "package_name": "com.jdlstudios.peliculasapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-PKlJzvoC0q1TF1C-ZjrI29PXmiY-gGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
